@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements hook_mail().
+ */
+function internet_reception_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'internet_reception':
+      $tmp_message = $params['message'];
+      $message['headers']['From'] = $tmp_message['from'];
+      $message['subject'] = $tmp_message['title'];
+      $message['body'][] = $tmp_message['message'];
+      break;
+  }
+}

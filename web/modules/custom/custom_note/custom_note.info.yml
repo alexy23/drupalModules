@@ -1,0 +1,9 @@
+name: 'Note'
+type: module
+description: 'Add new content type "Note"'
+package: Add Custom
+version: VERSION
+core: 8.x
+
+dependencies:
+  - node

@@ -1,0 +1,48 @@
+<?php
+module_load_include('inc', 'discount_code', 'discount_code.tokens');
+
+use Drupal\discount_code\Entity\DiscountCode;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Function output in partition help.
+ *
+ * @param string $route_name
+ *   Path url.
+ * @param \Drupal\Core\Routing\RouteMatchInterface $route_match
+ *   String find match in route.
+ *
+ * @return string
+ *   return string, which show in partion 'help'
+ */
+function discount_code_help($route_name, RouteMatchInterface $route_match) {
+  $output = '';
+  switch ($route_name) {
+    case 'help.page.discount_code':
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Path of settings module is "site_name/register_window".') . '</p>';
+      $output .= '<p>' . $this->t('You can used 2 tokens [discount_code:code] - output code of user, [discount_code:_name] - username related to the code') . '</p>';
+      break;
+  }
+  return $output;
+}
+
+/**
+ * Implements discount_code_user_insert(arg).
+ *
+ * @param object $account
+ *   Account of just now register user.
+ */
+function discount_code_user_insert($account) {
+  $create_code = DiscountCode::create([
+    'uid' => $account->id(),
+    'code' => DiscountCode::generateDiscountCode(),
+  ]);
+  $create_code->save();
+  $token = \Drupal::token();
+  $config = Drupal::config('discount_code.settings');
+  $string = $config->get('form.message');
+  $string = $token->replace($string, ['code' => $create_code]);
+  drupal_set_message($string);
+  return;
+}

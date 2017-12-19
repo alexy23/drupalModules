@@ -1,0 +1,53 @@
+<?php
+
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\CssCommand;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Ajax\PrependCommand;
+use Drupal\Core\Ajax\RemoveCommand;
+
+function form_ajax_login_form_user_login_form_alter(&$form) {
+  $form['system_messages'] = [
+    '#markup' => '<div class="form-system-messages"></div>',
+  ];
+
+  $form['actions']['submit']['#ajax'] = [
+    'callback' => 'ajaxSubmitForm',
+    'event' => 'click',
+    'progress' => [
+      'type' => 'throbber',
+    ],
+  ];
+}
+
+function ajaxSubmitForm(array &$form, FormStateInterface $form_state) {
+
+  $css_hidden = [
+    'visibility' => 'hidden',
+  ];
+  $css_block = [
+    'visibility' => 'visible',
+  ];
+  $ajax_response = new AjaxResponse();
+
+  $ajax_response->addCommand(new RemoveCommand('.messages__wrapper'));
+  $ajax_response->addCommand(new PrependCommand('.user-login-form',
+    '<div class="messages__wrapper layout-container"></div>'));
+
+  if ($form_state->hasAnyErrors()) {
+    $ajax_response->addCommand(new HtmlCommand('.messages__wrapper',
+      '<div class="messages messages--error">Incorrect login and/or password!</div>'));
+    drupal_get_messages();
+  }
+  else {
+
+    $ajax_response->addCommand(new HtmlCommand('.messages__wrapper',
+      '<div class="messages messages--status">To see the website as a registered user go to this <a href="/">link</a>.</div>'));
+    $ajax_response->addCommand(new CssCommand('.user-login-form', $css_hidden));
+    $ajax_response->addCommand(new CssCommand('.messages__wrapper', $css_block));
+    drupal_get_messages();
+  }
+
+  return $ajax_response;
+}

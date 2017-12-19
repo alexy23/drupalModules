@@ -1,0 +1,30 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: alexandr
+ * Date: 07.12.17
+ * Time: 8:44
+ */
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function js_message_page_attachments_alter(array &$attachments)
+{
+  $current_path = \Drupal::service('path.current')->getPath();
+  if($current_path == '/modal-page'){
+    $attachments['#attached']['library'][] =  'js_message/preview';
+  }else {
+    drupal_set_message('hello', 'status');
+    drupal_set_message('how', 'error');
+    drupal_set_message('life', 'warning');
+    drupal_set_message('my');
+    drupal_set_message('friend');
+    //  $config = $this->config('get_client_message_js.settings');
+    $config = \Drupal::config('js_message.settings');
+    $attachments['#attached']['library'][] = 'js_message/popup-system-message';
+    $attachments['#attached']['drupalSettings']['js_message']
+    ['popup_get_message']['get_message'] = drupal_get_messages();
+    $attachments['#attached']['drupalSettings']['js_message']
+    ['popup_get_message']['config'] = $config->get('form');
+  }
+}

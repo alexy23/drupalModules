@@ -1,0 +1,5 @@
+setting.promocode.form:
+  title: 'Change message of the promocode'
+  description: 'Change message about promocode of the user after register'
+  route_name: setting.promocode.form
+  parent: system.admin_config_ui

@@ -1,0 +1,5 @@
+setting.modal.form:
+  title: 'Modal form for message'
+  description: 'Change modal form for system messages'
+  route_name: setting.modal.form
+  parent: system.admin_config_ui

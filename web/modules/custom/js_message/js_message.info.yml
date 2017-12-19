@@ -1,0 +1,6 @@
+name: 'Js popup message'
+type: module
+description: 'Add new custom modal window for system information'
+package: Add Custom
+version: VERSION
+core: 8.x

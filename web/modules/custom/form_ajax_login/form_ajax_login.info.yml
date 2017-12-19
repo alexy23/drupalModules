@@ -1,0 +1,5 @@
+name: ajax login
+type: module
+description: 'ajax method for form login'
+core: 8.x
+package: Add Custom

@@ -1,0 +1,7 @@
+internet_reception_contribute:
+  path: '/internet_reception'
+  defaults:
+    _form: '\Drupal\internet_reception\Form\CustomForm'
+    _title: 'Form page'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,7 @@
+setting.promocode.form:
+  path: '/register_window'
+  defaults:
+    _title: 'Изменение приветственного сообщения при выдаче кодов'
+    _form: '\Drupal\discount_code\Form\EditForm'
+  requirements:
+    _permission: 'admin block'

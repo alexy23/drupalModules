@@ -1,0 +1,21 @@
+
+popup-system-message:
+  version: 1.x
+  css:
+    theme:
+      css/popup_get_message.css: {}
+  js:
+    js/popup_get_message.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/drupalSettings
+preview:
+  version: 1.x
+  css:
+    theme:
+      css/popup_get_message.css: {}
+  js:
+    js/preview.js: {}
+  dependencies:
+    - core/jquery

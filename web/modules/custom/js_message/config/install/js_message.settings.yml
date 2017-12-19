@@ -1,0 +1,5 @@
+form:
+  title_form: 'Информация'
+  background_color: '#ffffff'
+  background_color_head: '#cccccc'
+  width: 320

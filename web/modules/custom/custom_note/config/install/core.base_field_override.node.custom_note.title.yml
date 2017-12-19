@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.custom_note
+id: node.custom_note.title
+field_name: title
+entity_type: node
+bundle: note
+label: Note
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

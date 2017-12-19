@@ -1,0 +1,2 @@
+form:
+  message: 'Hello, "[discount_code:user_name]" Your discount code is [discount_code:code]'

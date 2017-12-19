@@ -1,0 +1,28 @@
+<?php
+use Drupal\node\Entity\Node;
+/**
+ * @param $info
+ */
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+
+//function custom_note_node_insert($entity) {
+//
+//  $node_note = Node::load($entity->id());
+//
+//  if ($node_note->bundle() == 'note') {
+//
+//    $config = Drupal::config('custom_note.settings');
+//    $timestampConfig = strtotime($config->get('status.date'));
+//
+//    $node_timestamp = array_shift(array_shift($node_note->created->getValue()));
+//    if ($timestampConfig > $node_timestamp) {
+//      $node_note->set('field_status', '1');
+//    }
+//    else {
+//      $node_note->set('field_status', '0');
+//    }
+//    $node_note->save();
+//  }
+//}
