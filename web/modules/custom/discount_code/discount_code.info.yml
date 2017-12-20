@@ -1,7 +1,7 @@
 name: 'The discount code of the users'
 type: module
 description: 'Add promo code for user'
-package: Add Custom
+package: 'Add Custom'
 version: VERSION
 core: 8.x
 

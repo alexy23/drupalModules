@@ -1,6 +1,6 @@
 <?php
-use Drupal\discount_code\Entity;
 
+use Drupal\discount_code\Entity;
 
 function discount_code_token_info() {
   return array(
@@ -24,6 +24,7 @@ function discount_code_token_info() {
     ),
   );
 }
+
 function discount_code_tokens($type, $tokens, array $data, array $options) {
   $replacements = [];
   if ($type == 'discount_code' && !empty($data['code'])) {
@@ -34,11 +35,12 @@ function discount_code_tokens($type, $tokens, array $data, array $options) {
         case 'code':
           $replacements[$original] = $code->getCode();
           break;
+
         case 'user_name':
           $replacements[$original] = $code->getOwnerName();
       }
     }
 
   }
-    return $replacements;
+  return $replacements;
 }
