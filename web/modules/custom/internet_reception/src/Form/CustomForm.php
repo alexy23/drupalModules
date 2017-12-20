@@ -1,4 +1,5 @@
 <?php
+
 namespace Drupal\internet_reception\Form;
 
 use Drupal;
@@ -25,8 +26,11 @@ class CustomForm extends FormBase {
 
   /**
    * Create Form with field.
+   *
    * @param array $form
-   * @param Drupal\Core\Form\FormStateInterface $form_state
+   *   Get link to array create form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Get All data in form.
    *
    * @return array
    *   Return complete Form with field
@@ -64,6 +68,15 @@ class CustomForm extends FormBase {
     );
     return $form;
   }
+
+  /**
+   * Function checks form on errors.
+   *
+   * @param array $form
+   *   Get link to array create form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Get All data in form.
+   */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     if (Drupal::service('email.validator')->isValid('email')) {
       $form_state->setErrorByName('email', $this->t('That e-mail address is not valid.'));
@@ -76,6 +89,14 @@ class CustomForm extends FormBase {
     }
   }
 
+  /**
+   * Send data of form on work script.
+   *
+   * @param array $form
+   *   Get link to array $form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   Get All data in form.
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $langcode = 'en';
     $mailManager = \Drupal::service('plugin.manager.mail');
@@ -92,7 +113,8 @@ class CustomForm extends FormBase {
     $params = array(
       'message' => $message,
     );
-    $mailManager->mail($module, $key, $to, $langcode,  $params, NULL, true);
+    $mailManager->mail($module, $key, $to, $langcode, $params, NULL, TRUE);
     drupal_set_message('Mail has been sent.', 'status');
   }
+
 }

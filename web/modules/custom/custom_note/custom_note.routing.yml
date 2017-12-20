@@ -1,7 +1,7 @@
 setting.note.form:
   path: '/update_note'
   defaults:
-    _title: 'Пакетное изменение нод Note'
+    _title: 'Packet changes nodes Note'
     _form: '\Drupal\custom_note\Form\UpdateForm'
   requirements:
     _permission: 'admin block'

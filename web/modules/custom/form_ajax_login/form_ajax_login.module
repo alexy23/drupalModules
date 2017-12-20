@@ -7,6 +7,10 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\PrependCommand;
 use Drupal\Core\Ajax\RemoveCommand;
 
+
+/**
+ *  Implements hook_ENTITY_ID_alter()
+ */
 function form_ajax_login_form_user_login_form_alter(&$form) {
   $form['system_messages'] = [
     '#markup' => '<div class="form-system-messages"></div>',

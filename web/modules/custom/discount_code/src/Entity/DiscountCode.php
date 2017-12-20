@@ -9,7 +9,6 @@ use Drupal\Core\Entity\ContentEntityInterface;
 /**
  * Defines the discount_code entity.
  *
- * @ingroup discount_code
  *
  * @ContentEntityType(
  *   id = "discount_code",
