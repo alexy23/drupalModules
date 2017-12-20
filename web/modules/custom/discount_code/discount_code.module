@@ -1,4 +1,5 @@
 <?php
+
 module_load_include('inc', 'discount_code', 'discount_code.tokens');
 
 use Drupal\discount_code\Entity\DiscountCode;
@@ -21,7 +22,7 @@ function discount_code_help($route_name, RouteMatchInterface $route_match) {
     case 'help.page.discount_code':
       $output .= '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('Path of settings module is "site_name/register_window".') . '</p>';
-      $output .= '<p>' . $this->t('You can used 2 tokens [discount_code:code] - output code of user, [discount_code:_name] - username related to the code') . '</p>';
+      $output .= '<p>' . t('You can used 2 tokens [discount_code:code] - output code of user, [discount_code:_name] - username related to the code') . '</p>';
       break;
   }
   return $output;

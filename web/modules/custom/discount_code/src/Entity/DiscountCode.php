@@ -1,11 +1,12 @@
 <?php
 
+namespace Drupal\discount_code\Entity;
+
 /**
  * @file
  * Contains \Drupal\discount_code\Entity\DiscountCode.
  */
 
-namespace Drupal\discount_code\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -31,18 +32,32 @@ use Drupal\user\Entity\User;
  * )
  */
 class DiscountCode extends ContentEntityBase implements ContentEntityInterface {
+
+  /**
+   * Return id of register user.
+   */
   public function getUid() {
     return $this->getEntityKey('uid');
   }
+
+  /**
+   * Return generate promocode of register user.
+   */
   public function getCode() {
     $test = $this->getEntityKey('code');
     return $test;
   }
 
+  /**
+   * Return Name register account.
+   */
   public function getOwnerName() {
     return User::load($this->getUid())->getDisplayName();
   }
 
+  /**
+   * Generate Promocode for users.
+   */
   public static function generateDiscountCode() {
     $temp_array_gen = array();
     $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
