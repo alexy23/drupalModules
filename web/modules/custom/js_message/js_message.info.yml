@@ -1,4 +1,4 @@
-name: 'Js popup message'
+name: 'Js modal message'
 type: module
 description: 'Add new custom modal window for system information'
 package: Add Custom

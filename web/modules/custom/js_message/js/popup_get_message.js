@@ -81,8 +81,8 @@
                 }
                 function dragElement(elmnt) {
                     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-                    if (document.getElementsByClassName("modal-head")[0]) {
-                        document.getElementsByClassName("modal-head")[0].onmousedown = dragMouseDown;
+                    if ($('.modal-head')[0]) {
+                        $(this)[0].onmousedown = dragMouseDown;
                     } else {
                         elmnt.onmousedown = dragMouseDown;
                     }
@@ -117,7 +117,7 @@
 
                 );
                 $("#overlay").click(function () {
-                        $("#overlay").hide();
+                        $(this).hide();
                         $(".modal").hide();
                     }
                 );

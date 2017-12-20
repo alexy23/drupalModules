@@ -14,11 +14,11 @@
                 });
                 $("input[name='width']").on('keydown', function (e) {
                     switch(e.keyCode){
-                        case 38:   // если нажата клавиша вверх
+                        case 38:   // if push key up
                             $(this).val(parseInt($(this).val())  + 1);
                             $(".modal").css("width", $(this).val() + 'px');
                             break;
-                        case 40:    // если нажата клавиша вниз
+                        case 40:    // if push key down
                             $(this).val(parseInt($(this).val())  - 1);
                             $(".modal").css("width", $(this).val() + 'px');
                             break;

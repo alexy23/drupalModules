@@ -1,7 +1,7 @@
 setting.modal.form:
   path: '/modal-page'
   defaults:
-    _title: 'Форма изменения всплывающего окна'
+    _title: 'Change form modal window'
     _form: '\Drupal\js_message\Form\SettingModalForm'
   requirements:
     _permission: 'administer blocks'
