@@ -35,7 +35,9 @@ class DiscountCode extends ContentEntityBase implements ContentEntityInterface {
    * @param EntityTypeInterface $entity_type
    * @return array|\Drupal\Core\Field\FieldDefinitionInterface[]
    */
+
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+
     $fields = parent::baseFieldDefinitions($entity_type);
 
     $fields['id'] = BaseFieldDefinition::create('integer')
@@ -63,6 +65,7 @@ class DiscountCode extends ContentEntityBase implements ContentEntityInterface {
 
     return $fields;
   }
+
   /**
    * Generate promo code user after register.
    *
@@ -86,29 +89,29 @@ class DiscountCode extends ContentEntityBase implements ContentEntityInterface {
    * @return mixed
    *   Return object entity in db.
    */
-//  public function getCode() {
-//    return $this->getEntityKey('code');
-//  }
-//
-//  /**
-//   * Function request field Uid in table discount_code of database.
-//   *
-//   * @return mixed
-//   *   Return object entity in db.
-//   */
-//  public function getUid() {
-//    return $this->getEntityKey('uid');
-//  }
-//
-//  /**
-//   * Function request name of user in entity promo code.
-//   *
-//   * @return array|\Drupal\Component\Render\MarkupInterface|mixed|null|string
-//   *   Return name of object user which relation with discount code.
-//   */
-//  public function getOwnerName() {
-//    return User::load($this->getUid())->getDisplayName();
-//  }
+  //  public function getCode() {
+  //    return $this->getEntityKey('code');
+  //  }
+  //
+  //  /**
+  //   * Function request field Uid in table discount_code of database.
+  //   *
+  //   * @return mixed
+  //   *   Return object entity in db.
+  //   */
+  //  public function getUid() {
+  //    return $this->getEntityKey('uid');
+  //  }
+  //
+  //  /**
+  //   * Function request name of user in entity promo code.
+  //   *
+  //   * @return array|\Drupal\Component\Render\MarkupInterface|mixed|null|string
+  //   *   Return name of object user which relation with discount code.
+  //   */
+  //  public function getOwnerName() {
+  //    return User::load($this->getUid())->getDisplayName();
+  //  }
 
 
 }
