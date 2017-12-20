@@ -6,8 +6,6 @@ use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\user\Entity\User;
-
 /**
  * Defines the discount_code entity.
  *
@@ -19,6 +17,7 @@ use Drupal\user\Entity\User;
  *   base_table = "discount_code",
  *   entity_keys = {
  *     "id" = "id",
+ *     "uuid" = "uuid"
  *     "uid" = "uid",
  *     "code" = "code",
  *   },
@@ -31,54 +30,6 @@ use Drupal\user\Entity\User;
  * @package Drupal\discount_code\Entity
  */
 class DiscountCode extends ContentEntityBase implements ContentEntityInterface {
-
-  /**
-   * Generate promo code user after register.
-   *
-   * @return string
-   *   Return string generate code.
-   */
-  public static function generateDiscountCode() {
-    $temp_array_gen = array();
-    $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
-    $count_gen_liter = 10;
-    for ($i = 0; $i < $count_gen_liter; $i++) {
-      $n = rand(0, strlen($alphabet) - 1);
-      $temp_array_gen[] = $alphabet[$n];
-    }
-    return implode('', $temp_array_gen);
-  }
-
-  /**
-   * Function request field code in entity of database.
-   *
-   * @return mixed
-   *   Return object entity in db.
-   */
-  public function getCode() {
-    return $this->getEntityKey('code');
-  }
-
-  /**
-   * Function request field Uid in table discount_code of database.
-   *
-   * @return mixed
-   *   Return object entity in db.
-   */
-  public function getUid() {
-    return $this->getEntityKey('uid');
-  }
-
-  /**
-   * Function request name of user in entity promo code.
-   *
-   * @return array|\Drupal\Component\Render\MarkupInterface|mixed|null|string
-   *   Return name of object user which relation with discount code.
-   */
-  public function getOwnerName() {
-    return User::load($this->getUid())->getDisplayName();
-  }
-
   /**
    * Extends class baseFieldDefinition and create enitity discount_code.
    * @param EntityTypeInterface $entity_type
@@ -112,5 +63,52 @@ class DiscountCode extends ContentEntityBase implements ContentEntityInterface {
 
     return $fields;
   }
+  /**
+   * Generate promo code user after register.
+   *
+   * @return string
+   *   Return string generate code.
+   */
+  public static function generateDiscountCode() {
+    $temp_array_gen = array();
+    $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+    $count_gen_liter = 10;
+    for ($i = 0; $i < $count_gen_liter; $i++) {
+      $n = rand(0, strlen($alphabet) - 1);
+      $temp_array_gen[] = $alphabet[$n];
+    }
+    return implode('', $temp_array_gen);
+  }
+
+  /**
+   * Function request field code in entity of database.
+   *
+   * @return mixed
+   *   Return object entity in db.
+   */
+//  public function getCode() {
+//    return $this->getEntityKey('code');
+//  }
+//
+//  /**
+//   * Function request field Uid in table discount_code of database.
+//   *
+//   * @return mixed
+//   *   Return object entity in db.
+//   */
+//  public function getUid() {
+//    return $this->getEntityKey('uid');
+//  }
+//
+//  /**
+//   * Function request name of user in entity promo code.
+//   *
+//   * @return array|\Drupal\Component\Render\MarkupInterface|mixed|null|string
+//   *   Return name of object user which relation with discount code.
+//   */
+//  public function getOwnerName() {
+//    return User::load($this->getUid())->getDisplayName();
+//  }
+
 
 }

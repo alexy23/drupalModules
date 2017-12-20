@@ -5,50 +5,56 @@
     Drupal.behaviors.getClientMessageBehavior = {
         attach: function (context, settings) {
             $(function () {
-                var message = drupalSettings.js_message.popup_get_message.get_message;
+                var jsmessage = drupalSettings.js_message.popup_get_message.get_message;
                 var config = drupalSettings.js_message.popup_get_message.config;
-                if(message.length != 0) {
+                if(jsmessage.length != 0) {
                     createmodal();
                     $("#overlay").show();
                     dragElement($(".modal")[0]);
-                    for(var i = 0; i < message.status.length; i++){
-                        $(".modal").find(
-                            $(".modal-body")
-                        ).append(
+                    if (jsmessage.status != null) {
+                        for (var i = 0; i < jsmessage.status.length; i++) {
+                            $(".modal").find(
+                                $(".modal-body")
+                            ).append(
                                 $('<div class="modal-message modal-message-status">'
-                                    + message.status[i] + '</div>').attr(
+                                    + jsmessage.status[i] + '</div>').attr(
                                     'id', 'modal-status-' + i
                                 )
                             );
-                        $("#modal-status-" + i).click(function(){
-                            $(this).hide('slow');
-                        })
+                            $("#modal-status-" + i).click(function () {
+                                $(this).hide('slow');
+                            })
+                        }
                     }
-                    for(var i = 0; i < message.error.length; i++){
-                        $(".modal").find(
-                            $(".modal-body")
-                        ).append(
+                    else if (jsmessage.error != null) {
+                        for (var i = 0; i < jsmessage.error.length; i++) {
+                            $(".modal").find(
+                                $(".modal-body")
+                            ).append(
                                 $('<div class="modal-message modal-message-error">'
-                                    + message.error[i] + '</div>').attr(
+                                    + jsmessage.error[i] + '</div>').attr(
                                     'id', 'modal-error-' + i
                                 )
-                        );
-                        $("#modal-error-" + i).click(function(){
-                            $(this).hide('slow');
-                        });
+                            );
+                            $("#modal-error-" + i).click(function () {
+                                $(this).hide('slow');
+                            });
+                        }
                     }
-                    for(var i = 0; i < message.warning.length; i++){
-                        $(".modal").find(
-                            $(".modal-body")
-                        ).append(
+                    else if (jsmessage.warning != null) {
+                        for (var i = 0; i < jsmessage.warning.length; i++) {
+                            $(".modal").find(
+                                $(".modal-body")
+                            ).append(
                                 $('<div class="modal-message modal-message-warning">'
-                                    + message.warning[i] + '</div>').attr(
+                                    + jsmessage.warning[i] + '</div>').attr(
                                     'id', 'modal-warning-' + i
                                 )
-                        );
-                        $("#modal-warning-" + i).click(function(){
-                            $(this).hide('slow');
-                        });
+                            );
+                            $("#modal-warning-" + i).click(function () {
+                                $(this).hide('slow');
+                            });
+                        }
                     }
                 }
                 function createmodal(){
