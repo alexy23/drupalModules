@@ -7,24 +7,26 @@
  */
 
 /**
+ * Function attached js and css library on page.
+ *
  * @object $attachments
  *    Object of attach page
  * Implements hook_page_attachments_alter().
- * 
- * @return null
+ *
+ * @return;
  */
-function js_message_page_attachments_alter(array &$attachments)
-{
-    $current_path = \Drupal::service('path.current')->getPath();
-    if ($current_path == '/modal-page') {
-        $attachments['#attached']['library'][] =  'js_message/preview';
-    } else {
-        //  $config = $this->config('get_client_message_js.settings');
-        $config = \Drupal::config('js_message.settings');
-        $attachments['#attached']['library'][] = 'js_message/popup-system-message';
-        $attachments['#attached']['drupalSettings']['js_message']
-        ['popup_get_message']['get_message'] = drupal_get_messages();
-        $attachments['#attached']['drupalSettings']['js_message']
-        ['popup_get_message']['config'] = $config->get('form');
-    }
+function js_message_page_attachments_alter(array &$attachments) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  if ($current_path == '/modal-page') {
+    $attachments['#attached']['library'][] = 'js_message/preview';
+  }
+  else {
+    // $config = $this->config('get_client_message_js.settings');.
+    $config = \Drupal::config('js_message.settings');
+    $attachments['#attached']['library'][] = 'js_message/popup-system-message';
+    $attachments['#attached']['drupalSettings']['js_message']['popup_get_message']['get_message']
+      = drupal_get_messages();
+    $attachments['#attached']['drupalSettings']['js_message']['popup_get_message']['config']
+      = $config->get('form');
+  }
 }
