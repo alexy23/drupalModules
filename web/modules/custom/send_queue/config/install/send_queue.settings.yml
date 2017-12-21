@@ -1,0 +1,2 @@
+mail:
+  message: 'Hello, "[queue:username]" If this email is sent, everything is fine!!. Address: [queue:mail]'

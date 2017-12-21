@@ -1,0 +1,55 @@
+<?php
+
+module_load_include('inc', 'send_queue', 'send_queue.tokens');
+use Drupal\Core\Routing\RouteMatchInterface;
+
+function send_queue_help($route_name, RouteMatchInterface $route_match) {
+  $output = '';
+  switch ($route_name) {
+    case 'help.page.send_queue':
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Path of settings module is "site_name/queue-node".') . '</p>';
+      $output .= '<p>' . t('You can used 2 tokens [queue:username] - Name of user - addressee,
+       [queue:mail] - E-mail of user - addressee ') . '</p>';
+      break;
+  }
+  return $output;
+}
+
+/**
+ * Automatic send message all users.
+ */
+function send_queue_cron() {
+
+  $queue = \Drupal::queue('send_message');
+  $token = \Drupal::token();
+  $time_end = time() + 60;
+  while (time() < $time_end && ($item = $queue->claimItem())) {
+    $langcode = 'en';
+    $mailManager = \Drupal::service('plugin.manager.mail');
+    $module = 'send_queue';
+    $key = 'send_queue';
+    $to = $item->data['email'];
+    $config = \Drupal::config('send_queue.settings');
+    $text = $config->get('mail.message');
+    $string = $token->replace($text, ['item' => $item]);
+    $params = [
+      'message' => $string,
+    ];
+    $mailManager->mail($module, $key, $to, $langcode, $params, NULL, TRUE);
+    $queue->deleteItem($item);
+  }
+
+}
+
+/**
+ * Implements hook_mail().
+ */
+function send_queue_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'send_queue':
+      $message['headers']['From'] = \Drupal::config('system.site')->get('mail');
+      $message['body'][] = $params['message'];
+      break;
+  }
+}

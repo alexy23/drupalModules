@@ -1,0 +1,7 @@
+send_queue.queue_node:
+  path: '/queue-node'
+  defaults:
+    _title: 'Send message to all user by Queue'
+    _form: '\Drupal\send_queue\Form\MessageQueue'
+  requirements:
+      _permission: 'administer node'

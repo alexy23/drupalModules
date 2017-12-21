@@ -1,0 +1,5 @@
+name: 'Message Queue'
+type: module
+description: 'send message to user via queue'
+core: 8.x
+package: Add Custom
