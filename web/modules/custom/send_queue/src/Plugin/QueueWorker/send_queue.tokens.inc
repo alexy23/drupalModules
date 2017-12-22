@@ -31,16 +31,17 @@ function send_queue_token_info() {
  */
 function send_queue_tokens($type, $tokens, array $data, array $options) {
   $replacements = [];
-  if ($type == 'queue' && !empty($data['user'])) {
-    $user = $data['user'];
+  if ($type == 'queue' && !empty($data['item'])) {
+    $item = $data['item'];
+
     foreach ($tokens as $name => $original) {
       switch ($name) {
         case 'username':
-          $replacements[$original] = $user->get('name')->value;
+          $replacements[$original] = $item->data['name'];
           break;
 
         case 'mail':
-          $replacements[$original] = $user->get('mail')->value;
+          $replacements[$original] = $item->data['email'];
       }
     }
 

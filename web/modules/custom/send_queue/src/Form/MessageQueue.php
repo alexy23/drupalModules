@@ -4,7 +4,7 @@ namespace Drupal\send_queue\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\user\Entity\User;
+
 
 /**
  * Class MessageQueue.
@@ -42,6 +42,7 @@ class MessageQueue extends FormBase {
    * Standart function send data form to server.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+
     $values = $form_state->getValues();
 
     \Drupal::configFactory()
@@ -49,17 +50,22 @@ class MessageQueue extends FormBase {
       ->set('mail.message', $values['edit_message'])
       ->save();
 
-    $queue = \Drupal::queue('send_message');
-    $users = User::loadMultiple();
-    if ($users['0']) {
-      unset($users['0']);
+    $queue = \Drupal::queue('email_queue');
+    $queue->createQueue();
+
+    $uids = \Drupal::entityQuery('user')
+      ->execute();
+    if ($uids["0"] != NULL) {
+      unset($uids["0"]);
     }
-    foreach ($users as $user) {
+    $start_time = microtime(TRUE);
+    foreach ($uids as $uid) {
       $queue->createItem([
-        'name' => $user->getDisplayName(),
-        'email' => $user->getEmail(),
+        'uid' => $uid,
       ]);
     }
+    $end_time = microtime(TRUE);
+    drupal_set_message(round(($end_time-$start_time),5)." сек");
   }
 
 }

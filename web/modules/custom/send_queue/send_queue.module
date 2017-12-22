@@ -17,32 +17,6 @@ function send_queue_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Automatic send message all users.
- */
-function send_queue_cron() {
-
-  $queue = \Drupal::queue('send_message');
-  $token = \Drupal::token();
-  $time_end = time() + 60;
-  while (time() < $time_end && ($item = $queue->claimItem())) {
-    $langcode = 'en';
-    $mailManager = \Drupal::service('plugin.manager.mail');
-    $module = 'send_queue';
-    $key = 'send_queue';
-    $to = $item->data['email'];
-    $config = \Drupal::config('send_queue.settings');
-    $text = $config->get('mail.message');
-    $string = $token->replace($text, ['item' => $item]);
-    $params = [
-      'message' => $string,
-    ];
-    $mailManager->mail($module, $key, $to, $langcode, $params, NULL, TRUE);
-    $queue->deleteItem($item);
-  }
-
-}
-
-/**
  * Implements hook_mail().
  */
 function send_queue_mail($key, &$message, $params) {
