@@ -5,7 +5,6 @@ namespace Drupal\send_queue\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
-
 /**
  * Class MessageQueue.
  *
@@ -65,7 +64,7 @@ class MessageQueue extends FormBase {
       ]);
     }
     $end_time = microtime(TRUE);
-    drupal_set_message(round(($end_time-$start_time),5)." сек");
+    drupal_set_message(round(($end_time - $start_time), 5) . " сек");
   }
 
 }
