@@ -19,7 +19,6 @@ class SettingModalForm extends ConfigFormBase{
   function buildForm(array $form, FormStateInterface $form_state)
   {
     $config = $this->config('js_message.settings');
-
     $form['title'] = array(
       '#title' => $this->t('Change title form'),
       '#type' => 'textfield',

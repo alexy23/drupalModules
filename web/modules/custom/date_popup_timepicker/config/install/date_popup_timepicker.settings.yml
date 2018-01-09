@@ -1,0 +1,46 @@
+timepicker:
+  timeSeparator: ':'
+  showLeadingZero: TRUE
+  showMinutesLeadingZero: TRUE
+  showPeriod: :FALSE
+  showPeriodLabels: TRUE
+  periodSeparator: ' '
+  altField: '#alternate_input'
+  defaultTime: 'now'
+  showOn: 'focus'
+  button: 'NULL'
+  hourText: 'Hour'
+  minuteText: 'Minute'
+  amPmText:
+    - 'AM'
+    - 'PM'
+  myPosition: 'left top'
+  atPosition: 'left bottom'
+  beforeShow: NULL
+  onSelect: NULL
+  onClose: NULL
+  onHourShow: NULL
+  onMinuteShow: NULL
+  hours:
+    starts: 0
+    ends: 23
+  minutes:
+    starts: 0
+    ends: 55
+    interval: 5
+    manual: []
+  rows: 4
+  showHours: TRUE
+  showMinutes: TRUE
+  minTime:
+    hour: NULL
+    minute: NULL
+  maxTime:
+    hour: NULL
+    minute: NULL
+  showCloseButton: FALSE
+  closeButtonText: 'Done'
+  showNowButton: FALSE
+  nowButtonText: 'Now'
+  showDeselectButton: FALSE
+  deselectButtonText: 'Deselect'

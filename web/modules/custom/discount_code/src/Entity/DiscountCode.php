@@ -4,7 +4,7 @@ namespace Drupal\discount_code\Entity;
 
 /**
  * @file
- * Contains \Drupal\discount_code\Entity\DiscountCode.
+ * Contains \Drupal\discount_code\Entity\DiscountCode.php.
  */
 
 
@@ -15,7 +15,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\user\Entity\User;
 
 /**
- * Defines the DiscountCode entity.
+ * Defines the DiscountCode.php entity.
  *
  * @ingroup discount_code
  *
@@ -70,10 +70,18 @@ class DiscountCode extends ContentEntityBase implements ContentEntityInterface {
   }
 
   /**
+   * Get Current user and his promocode.
+   */
+  public static function getCurrentUserId() {
+    return [\Drupal::currentUser()->id()];
+  }
+
+  /**
    * Determines the schema for the base_table property defined above.
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
-
+    $fields = parent::baseFieldDefinitions($entity_type);
+    /** @var \Drupal\Core\Field\BaseFieldDefinition[] $fields */
     // Standard field, used as unique if primary index.
     $fields['id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('ID'))
@@ -91,8 +99,14 @@ class DiscountCode extends ContentEntityBase implements ContentEntityInterface {
       ->setDescription(t('The UID of the  reference user id entity.'))
       ->setReadOnly(TRUE)
       ->setSetting('target_type', 'user')
-      ->setSetting('handler', 'default');
-
+      ->setSetting('handler', 'default')
+      ->setDefaultValueCallback('Drupal\discount_code\Entity\DiscountCode::getCurrentUserId')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'author',
+        'weight' => 0,
+      ]);
     $fields['code'] = BaseFieldDefinition::create('string')
       ->setLabel(t("The Promo code"))
       ->setDescription(t('The code of user.'))

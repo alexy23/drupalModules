@@ -41,7 +41,7 @@ class MessageQueue extends FormBase {
    * Standart function send data form to server.
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-
+    $start_time = microtime(TRUE);
     $values = $form_state->getValues();
 
     \Drupal::configFactory()
@@ -57,7 +57,7 @@ class MessageQueue extends FormBase {
     if ($uids["0"] != NULL) {
       unset($uids["0"]);
     }
-    $start_time = microtime(TRUE);
+
     foreach ($uids as $uid) {
       $queue->createItem([
         'uid' => $uid,

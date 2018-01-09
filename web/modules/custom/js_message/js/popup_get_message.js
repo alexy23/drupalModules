@@ -15,7 +15,7 @@
                         for (var i = 0; i < jsmessage.status.length; i++) {
                             $(".modal").find(
                                 $(".modal-body")
-                            ).append(
+                            ).once('complete-status-' + i).append(
                                 $('<div class="modal-message modal-message-status">'
                                     + jsmessage.status[i] + '</div>').attr(
                                     'id', 'modal-status-' + i
@@ -25,12 +25,13 @@
                                 $(this).hide('slow');
                             })
                         }
+
                     }
-                    else if (jsmessage.error != null) {
+                    if (jsmessage.error != null) {
                         for (var i = 0; i < jsmessage.error.length; i++) {
                             $(".modal").find(
                                 $(".modal-body")
-                            ).append(
+                            ).once('complete-error-' + i).append(
                                 $('<div class="modal-message modal-message-error">'
                                     + jsmessage.error[i] + '</div>').attr(
                                     'id', 'modal-error-' + i
@@ -41,11 +42,11 @@
                             });
                         }
                     }
-                    else if (jsmessage.warning != null) {
+                    if (jsmessage.warning != null) {
                         for (var i = 0; i < jsmessage.warning.length; i++) {
                             $(".modal").find(
                                 $(".modal-body")
-                            ).append(
+                            ).once('complete-warning-' + i).append(
                                 $('<div class="modal-message modal-message-warning">'
                                     + jsmessage.warning[i] + '</div>').attr(
                                     'id', 'modal-warning-' + i

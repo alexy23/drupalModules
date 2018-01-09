@@ -16,16 +16,15 @@ use Drupal\user\Entity\User;
  * @QueueWorker(
  *   id = "email_queue",
  *   title = @Translation("Task worker: email queue"),
- *   cron = {"time" = 60}
+ *   cron = {"time" = 10}
  * )
  */
 class EmailQueue extends QueueWorkerBase {
 
   public function processItem($uid) {
-    $langcode = 'en';
     $token = \Drupal::token();
     $user = User::load($uid['uid']);
-    $mailManager = \Drupal::service('plugin.manager.mail');
+    $langcode = $user->getPreferredLangcode();
     $module = 'send_queue';
     $key = 'send_queue';
     $to = $user->get('mail')->value;
@@ -35,6 +34,7 @@ class EmailQueue extends QueueWorkerBase {
     $params = [
       'message' => $string,
     ];
+    $mailManager = \Drupal::service('plugin.manager.mail');
     $mailManager->mail($module, $key, $to, $langcode, $params, NULL, TRUE);
   }
 }
