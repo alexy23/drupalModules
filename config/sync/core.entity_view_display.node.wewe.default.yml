@@ -1,0 +1,28 @@
+uuid: 0a388e02-5b70-4f51-bd38-d00b664e3fda
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.wewe.field_qweqw
+    - node.type.wewe
+  module:
+    - datetime
+    - user
+id: node.wewe.default
+targetEntityType: node
+bundle: wewe
+mode: default
+content:
+  field_qweqw:
+    weight: 101
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden: {  }

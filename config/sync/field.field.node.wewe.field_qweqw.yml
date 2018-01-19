@@ -1,0 +1,21 @@
+uuid: a1ec8895-c231-43cb-b631-08f194d69874
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_qweqw
+    - node.type.wewe
+  module:
+    - datetime
+id: node.wewe.field_qweqw
+field_name: field_qweqw
+entity_type: node
+bundle: wewe
+label: qweqw
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

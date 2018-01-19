@@ -1,0 +1,21 @@
+uuid: 3b9fba03-59da-4eed-bf0f-b2ea535feddc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ffg
+    - node.type.tbt
+  module:
+    - datetime
+id: node.tbt.field_ffg
+field_name: field_ffg
+entity_type: node
+bundle: tbt
+label: ffg
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

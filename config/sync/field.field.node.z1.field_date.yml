@@ -1,0 +1,21 @@
+uuid: db11424e-4b12-479d-aee6-af36eac7c7a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date
+    - node.type.z1
+  module:
+    - datetime
+id: node.z1.field_date
+field_name: field_date
+entity_type: node
+bundle: z1
+label: date
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

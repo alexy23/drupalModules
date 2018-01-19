@@ -1,0 +1,20 @@
+uuid: 2849d5e2-b89b-4900-abeb-b861ae145d23
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_qweqw
+field_name: field_qweqw
+entity_type: node
+type: datetime
+settings:
+  datetime_type: datetime
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

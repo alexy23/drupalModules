@@ -1,0 +1,28 @@
+uuid: 1203c456-57c1-49c2-a912-69f8b9776f84
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.wdawda.field_qqq
+    - node.type.wdawda
+  module:
+    - datetime
+    - user
+id: node.wdawda.default
+targetEntityType: node
+bundle: wdawda
+mode: default
+content:
+  field_qqq:
+    weight: 101
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden: {  }

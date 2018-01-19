@@ -1,0 +1,21 @@
+uuid: 009718e6-5abd-4d22-8c84-725c5ca75b5f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_wewe
+    - node.type.z1
+  module:
+    - datetime
+id: node.z1.field_wewe
+field_name: field_wewe
+entity_type: node
+bundle: z1
+label: wewe
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

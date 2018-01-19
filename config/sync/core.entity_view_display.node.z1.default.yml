@@ -1,0 +1,38 @@
+uuid: 5886a5a3-6cca-43bc-a8fa-86b3f362ef99
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.z1.field_date
+    - field.field.node.z1.field_wewe
+    - node.type.z1
+  module:
+    - datetime
+    - user
+id: node.z1.default
+targetEntityType: node
+bundle: z1
+mode: default
+content:
+  field_date:
+    weight: 101
+    label: above
+    settings:
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_plain
+    region: content
+  field_wewe:
+    weight: 102
+    label: above
+    settings:
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_plain
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

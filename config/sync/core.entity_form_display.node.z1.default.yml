@@ -1,0 +1,168 @@
+uuid: 8c4fecee-8cbf-4300-8ecd-e158dda055cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.z1.field_date
+    - field.field.node.z1.field_wewe
+    - node.type.z1
+  module:
+    - date_popup_timepicker
+    - path
+id: node.z1.default
+targetEntityType: node
+bundle: z1
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_date:
+    weight: 121
+    settings:
+      timeSeparator: ':вй'
+      showLeadingZero: '1'
+      showMinutesLeadingZero: '1'
+      showPeriodLabels: '1'
+      periodSeparator: ' '
+      defaultTime: now
+      showOn: focus
+      hourText: Hour
+      minuteText: Minute
+      amPmText:
+        - AM
+        - PM
+      hours:
+        starts: '0'
+        ends: '23'
+      minutes:
+        starts: '0'
+        ends: '55'
+        interval: '5'
+      rows: '4'
+      showHours: '1'
+      showMinutes: '1'
+      minTime:
+        hour: ''
+        minute: ''
+      maxTime:
+        hour: ''
+        minute: ''
+      closeButtonText: Done
+      nowButtonText: Now
+      deselectButtonText: Deselect
+      showPeriod: 0
+      showCloseButton: 0
+      showNowButton: 0
+      showDeselectButton: 0
+      altField: '#alternate_input'
+      button: null
+      myPosition: 'left top'
+      atPosition: 'left bottom'
+      beforeShow: null
+      onSelect: null
+      onClose: null
+      onHourShow: null
+      onMinuteShow: null
+    third_party_settings: {  }
+    type: datetime_timepicker
+    region: content
+  field_wewe:
+    weight: 122
+    settings:
+      timeSeparator: ':'
+      showLeadingZero: true
+      showMinutesLeadingZero: true
+      showPeriod: false
+      showPeriodLabels: true
+      periodSeparator: ' '
+      altField: '#alternate_input'
+      defaultTime: now
+      showOn: focus
+      button: null
+      hourText: Hour
+      minuteText: Minute
+      amPmText:
+        - AM
+        - PM
+      myPosition: 'left top'
+      atPosition: 'left bottom'
+      beforeShow: null
+      onSelect: null
+      onClose: null
+      onHourShow: null
+      onMinuteShow: null
+      hours:
+        starts: 0
+        ends: 23
+      minutes:
+        starts: 0
+        ends: 55
+        interval: 5
+        manual: {  }
+      rows: 4
+      showHours: true
+      showMinutes: true
+      minTime:
+        hour: null
+        minute: null
+      maxTime:
+        hour: null
+        minute: null
+      showCloseButton: false
+      closeButtonText: Done
+      showNowButton: false
+      nowButtonText: Now
+      showDeselectButton: false
+      deselectButtonText: Deselect
+    third_party_settings: {  }
+    type: datetime_timepicker
+    region: content
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 15
+    region: content
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 120
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 16
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden: {  }

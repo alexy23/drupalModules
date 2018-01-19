@@ -1,0 +1,18 @@
+uuid: d7bfc335-155d-4862-b540-9512f075f584
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.wewe
+  module:
+    - user
+id: node.wewe.teaser
+targetEntityType: node
+bundle: wewe
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden: {  }

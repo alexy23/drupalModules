@@ -1,0 +1,21 @@
+uuid: ae20e576-ab08-451d-b67d-ef12c107cead
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_qqq
+    - node.type.wdawda
+  module:
+    - datetime
+id: node.wdawda.field_qqq
+field_name: field_qqq
+entity_type: node
+bundle: wdawda
+label: qqq
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

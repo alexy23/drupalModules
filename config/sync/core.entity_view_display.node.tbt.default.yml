@@ -1,0 +1,28 @@
+uuid: 7e33da64-3453-4da8-8606-6ec5362aa848
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.tbt.field_ffg
+    - node.type.tbt
+  module:
+    - datetime
+    - user
+id: node.tbt.default
+targetEntityType: node
+bundle: tbt
+mode: default
+content:
+  field_ffg:
+    weight: 101
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden: {  }

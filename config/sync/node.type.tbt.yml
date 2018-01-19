@@ -1,0 +1,18 @@
+uuid: afcc45fc-4d40-4e0d-b7ae-94672202652e
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: tbt
+type: tbt
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true
