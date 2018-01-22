@@ -445,13 +445,11 @@ class TimePickerWidget extends DateTimeWidgetBase {
    *   Settings for JS Timepicker.
    *
    * @return array
-   *   arrChanged settings after typefications of all parameters.
+   *   return array of changed settings after typefications of all parameters.
    */
   public function processFieldSettings(array $settings) {
     $options = isset($settings) ? $settings : array();
     if (!empty($options)) {
-      // @todo Define this list somewhere else since it's used in the DatePopupTimepickerTimepicker::fieldSettingsFormSubmit() as well.
-      // @todo Shorten code if possible.
       $groups = array(
         'boolean' => array(
           'showLeadingZero',
@@ -500,7 +498,50 @@ class TimePickerWidget extends DateTimeWidgetBase {
       // to insert html into labels.
       array_walk_recursive($options, $filter, $groups);
     }
-    return $options;
+    return $this->fieldSettingsFinalNullCleanType($options);
+  }
+
+  /**
+   * Method deleting Null parameters before send to JS.
+   *
+   * @param array $settings
+   *   Non-filter parameters.
+   *
+   * @return array
+   *   Returned filtering Parameters for send to JS
+   */
+  public function fieldSettingsFinalNullCleanType(array &$settings) {
+    $new = $settings;
+    // Convert boolean settings to boolean.
+    $boolean = array(
+      'showLeadingZero',
+      'showMinutesLeadingZero',
+      'showPeriod',
+      'showPeriodLabels',
+      'showHours',
+      'showMinutes',
+      'showCloseButton',
+      'showNowButton',
+      'showDeselectButton',
+    );
+    foreach ($boolean as $key) {
+      $new[$key] = (bool) $settings[$key];
+    }
+    // Final cleanup.
+    $not_null = function ($el) {
+      return isset($el);
+    };
+    foreach (array('hours', 'minutes', 'minTime', 'maxTime') as $key) {
+      $new[$key] = array_filter($settings[$key], $not_null);
+      if (empty($new[$key])) {
+        unset($new[$key]);
+      }
+    }
+    if (!isset($new['rows'])) {
+      // Make sure that NULL value is removed from settings.
+      unset($new['rows']);
+    }
+    return $new;
   }
 
 }
