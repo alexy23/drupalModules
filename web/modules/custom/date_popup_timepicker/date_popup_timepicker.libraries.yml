@@ -3,6 +3,7 @@ timepicker:
   css:
     theme:
       css/jquery.ui.timepicker.css: {}
+      css/custom.style.picker.css: {}
   js:
     js/date_popup_timepicker.timepicker.js: {}
     js/jquery.ui.timepicker.js: {}

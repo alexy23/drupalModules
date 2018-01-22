@@ -160,63 +160,42 @@ class TimePickerWidget extends DateTimeWidgetBase {
       '#title' => t('Time separator'),
       '#description' => t('The character to use to separate hours and minutes.'),
       '#default_value' => $options['timeSeparator'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['showLeadingZero'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show leading zero'),
       '#description' => t('Define whether or not to show a leading zero for hours < 10.'),
       '#default_value' => $options['showLeadingZero'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['showMinutesLeadingZero'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show minutes leading zero'),
       '#description' => t('Define whether or not to show a leading zero for minutes < 10.'),
       '#default_value' => $options['showMinutesLeadingZero'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['showPeriod'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show period'),
       '#description' => t('Define whether or not to show AM/PM with selected time.'),
       '#default_value' => $options['showPeriod'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['showPeriodLabels'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show period labels'),
       '#description' => t('Define if the AM/PM labels on the left are displayed.'),
       '#default_value' => $options['showPeriodLabels'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['periodSeparator'] = array(
       '#type' => 'textfield',
       '#title' => t('Period separator'),
       '#description' => t('The character to use to separate the time from the time period.'),
       '#default_value' => $options['periodSeparator'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['defaultTime'] = array(
       '#type' => 'textfield',
       '#title' => t('Default time'),
       '#description' => t("Used as default time when input field is empty or for inline timePicker. Set to 'now' for the current time, '' for no highlighted time."),
       '#default_value' => $options['defaultTime'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['showOn'] = array(
       '#type' => 'select',
@@ -228,25 +207,16 @@ class TimePickerWidget extends DateTimeWidgetBase {
         'both' => t('Both'),
       ),
       '#default_value' => $options['showOn'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['hourText'] = array(
       '#type' => 'textfield',
       '#title' => t('Hour text'),
       '#default_value' => $options['hourText'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['minuteText'] = array(
       '#type' => 'textfield',
       '#title' => t('Minute text'),
       '#default_value' => $options['minuteText'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['amPmText'] = array(
       '#type' => 'fieldset',
@@ -261,9 +231,6 @@ class TimePickerWidget extends DateTimeWidgetBase {
         '#type' => 'textfield',
         '#title' => t('PM'),
         '#default_value' => $options['amPmText'][1],
-      ),
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
       ),
     );
     $element['hours'] = array(
@@ -326,18 +293,12 @@ class TimePickerWidget extends DateTimeWidgetBase {
       '#title' => t('Show hours'),
       '#description' => t('Define if the hours section is displayed or not. Set to false to get a minute only dialog.'),
       '#default_value' => $options['showHours'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['showMinutes'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show minutes'),
       '#description' => t('Define if the minutes section is displayed or not. Set to false to get an hour only dialog.'),
       '#default_value' => $options['showMinutes'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['minTime'] = array(
       '#type' => 'fieldset',
@@ -382,54 +343,36 @@ class TimePickerWidget extends DateTimeWidgetBase {
       '#title' => t('Show close button'),
       '#description' => t('Shows an OK button to confirm the edit.'),
       '#default_value' => $options['showCloseButton'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['closeButtonText'] = array(
       '#type' => 'textfield',
       '#title' => t('Close button text'),
       '#description' => t('Text for the confirmation button (ok button).'),
       '#default_value' => $options['closeButtonText'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['showNowButton'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show now button'),
       '#description' => t('Shows the "now" button.'),
       '#default_value' => $options['showNowButton'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['nowButtonText'] = array(
       '#type' => 'textfield',
       '#title' => t('Now button text'),
       '#description' => t('Text for the now button.'),
       '#default_value' => $options['nowButtonText'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['showDeselectButton'] = array(
       '#type' => 'checkbox',
       '#title' => t('Show deselect button'),
       '#description' => t('Shows the deselect time button.'),
       '#default_value' => $options['showDeselectButton'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     $element['deselectButtonText'] = array(
       '#type' => 'textfield',
       '#title' => t('Deselect button text'),
       '#description' => t('Text for the deselect button.'),
       '#default_value' => $options['deselectButtonText'],
-      '#element_validate' => array(
-        array($this, 'fieldSettingsFormValidate'),
-      ),
     );
     return $element;
   }
@@ -438,60 +381,60 @@ class TimePickerWidget extends DateTimeWidgetBase {
    * {@inheritdoc}
    */
   public static function fieldSettingsFormValidate(&$element, FormStateInterface $form_state) {
-    // Validate int hours and minutes settings.
+    $key = $element['#parents'][count($element['#parents']) - 1];
     $copy_element_settings = $element['#parents'];
     unset($copy_element_settings[count($copy_element_settings) - 1]);
     $settings = &$form_state->getValue($copy_element_settings);
-    foreach (array('hours', 'minutes', 'minTime', 'maxTime') as $key) {
-      foreach ($settings[$key] as $subkey => $value) {
-        // Init validation limits.
-        if ($key == 'minutes' && $subkey == 'interval') {
-          $limits = array(1, 59);
-        }
-        elseif ($key == 'hours' || $subkey == 'hour') {
-          $limits = array(0, 23);
-        }
-        // Remaining things are minutes.
-        else {
-          $limits = array(0, 59);
-        }
-        // Validate.
-        if ($value !== '') {
-          if (!is_numeric($value) || intval($value) != $value || $value < $limits[0] || $value > $limits[1]) {
-            $t_args = array(
-              '%name' => $element[$key]['#title'],
-              '@start' => $limits[0],
-              '@end' => $limits[1],
-            );
-            $form_state->setErrorByName($element['timepicker_options'][$key][$subkey],
-              t('%name must be an integer between @start and @end.', $t_args));
-          }
-          else {
-            $form_state->set($settings[$key][$subkey], (int) $value);
-          }
-        }
-        else {
-          $form_state->set($settings[$key][$subkey], NULL);
-        }
-      }
-    }
 
-    // Validate rows part.
-    $value = $settings['rows'];
-    if ($value !== '') {
-      if (!is_numeric($value) || intval($value) != $value || $value < 2) {
-        $t_args = array(
-          '%name' => $element['timepicker_options']['rows']['#title'],
-        );
-        $form_state->setErrorByName($element['timepicker_options']['rows'],
-          t('%name must be an integer greater than 1.', $t_args));
+    // For two-tiered array.
+    foreach ($settings[$key] as $subkey => $value) {
+      // Init validation limits.
+      if ($key == 'minutes' && $subkey == 'interval') {
+        $limits = array(1, 59);
+      }
+      elseif ($key == 'hours' || $subkey == 'hour') {
+        $limits = array(0, 23);
+      }
+      // Remaining things are minutes.
+      else {
+        $limits = array(0, 59);
+      }
+      // Validate int hours and minutes settings.
+      if ($value !== '') {
+        if (!is_numeric($value) || intval($value) != $value || $value < $limits[0] || $value > $limits[1]) {
+          $t_args = array(
+            '%name' => $element['#title'],
+            '@start' => $limits[0],
+            '@end' => $limits[1],
+          );
+          $form_state->setErrorByName($element['#markup'],
+            t('%name must be an integer between @start and @end.', $t_args));
+        }
+        else {
+          $form_state->set($settings[$key][$subkey], (int) $value);
+        }
       }
       else {
-        $form_state->set($settings['rows'], (int) $value);
+        $form_state->set($settings[$key][$subkey], NULL);
+      }
+    }
+    // For one-tiered array.
+    if ($settings[$key] !== '') {
+      // Validate rows part.
+      if ($key === 'rows') {
+        if (!is_numeric($settings[$key]) || intval($settings[$key]) != $settings[$key] || $settings[$key] < 2) {
+          $t_args = array(
+            '%name' => $element['#title'],
+          );
+          $form_state->setErrorByName($element['#markup'], t('%name must be an integer greater than 1.', $t_args));
+        }
+        else {
+          $form_state->set($settings[$key], (int) $settings[$key]);
+        }
       }
     }
     else {
-      $form_state->set($settings['rows'], NULL);
+      $form_state->set($settings[$key], NULL);
     }
   }
 
