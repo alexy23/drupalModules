@@ -4,7 +4,7 @@ namespace Drupal\date_popup_timepicker\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\datetime\Plugin\Field\FieldWidget\DateTimeWidgetBase;
+use Drupal\datetime_range\Plugin\Field\FieldWidget\DateRangeWidgetBase;
 use Drupal\Component\Utility\Html;
 
 /**
@@ -14,11 +14,11 @@ use Drupal\Component\Utility\Html;
  *   id = "datetime_timepicker",
  *   label = @Translation("Timepicker"),
  *   field_types = {
- *     "datetime",
+ *     "daterange"
  *   }
  * )
  */
-class TimePickerWidget extends DateTimeWidgetBase {
+class DateRangeTimePickerWidget extends DateRangeWidgetBase {
 
   /**
    * {@inheritdoc}
@@ -26,11 +26,14 @@ class TimePickerWidget extends DateTimeWidgetBase {
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
     $name = $items->getName();
-    $name = $name . '[' . $delta . '][value][time]';
-    $element['#attached']['library'][] = 'date_popup_timepicker/timepicker';
-    $element['#attached']['drupalSettings']['datePopup'][$name] = array(
-      'settings' => $this->processFieldSettings($this->getSettings()),
-    );
+    $name_field[] = $name . '[' . $delta . '][value][time]';
+    $name_field[] = $name . '[' . $delta . '][end_value][time]';
+    foreach ($name_field as $name) {
+      $element['#attached']['library'][] = 'date_popup_timepicker/timepicker';
+      $element['#attached']['drupalSettings']['datePopup'][$name] = array(
+        'settings' => $this->processFieldSettings($this->getSettings()),
+      );
+    }
     return $element;
   }
 

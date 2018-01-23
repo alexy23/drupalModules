@@ -3,3 +3,7 @@ description: 'Adds a new timepicker option for datetime fields, providing a bett
 core: 8.x
 type: module
 package: Date/Time
+version: VERSION
+
+dependencies:
+  - datetime:datetime
