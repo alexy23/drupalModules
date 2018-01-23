@@ -14,7 +14,7 @@ use Drupal\Component\Utility\Html;
  *   id = "datetime_timepicker",
  *   label = @Translation("Timepicker"),
  *   field_types = {
- *     "datetime",
+ *     "datetime"
  *   }
  * )
  */

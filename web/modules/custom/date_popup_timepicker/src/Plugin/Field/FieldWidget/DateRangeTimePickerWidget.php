@@ -8,10 +8,10 @@ use Drupal\datetime_range\Plugin\Field\FieldWidget\DateRangeWidgetBase;
 use Drupal\Component\Utility\Html;
 
 /**
- * Plugin implementation of the 'datetime_timepicker' widget.
+ * Plugin implementation of the 'datetime_timepicker_list' widget.
  *
  * @FieldWidget(
- *   id = "datetime_timepicker",
+ *   id = "datetime_timepicker_list",
  *   label = @Translation("Timepicker"),
  *   field_types = {
  *     "daterange"
