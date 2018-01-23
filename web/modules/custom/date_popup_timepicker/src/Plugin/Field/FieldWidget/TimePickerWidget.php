@@ -403,11 +403,11 @@ class TimePickerWidget extends DateTimeWidgetBase {
             t('%name must be an integer between @start and @end.', $t_args));
         }
         else {
-          $form_state->set($settings[$key][$subkey], (int) $value);
+          $form_state->setValue($settings[$key][$subkey], (int) $value);
         }
       }
       else {
-        $form_state->set($settings[$key][$subkey], NULL);
+        $settings[$key][$subkey] = NULL;
       }
     }
     // For one-tiered array.
@@ -421,12 +421,12 @@ class TimePickerWidget extends DateTimeWidgetBase {
           $form_state->setErrorByName($element['#markup'], t('%name must be an integer greater than 1.', $t_args));
         }
         else {
-          $form_state->set($settings[$key], (int) $settings[$key]);
+          $form_state->setValue($settings[$key], (int) $settings[$key]);
         }
       }
     }
     else {
-      $form_state->set($settings[$key], NULL);
+      $settings[$key] = NULL;
     }
   }
 
@@ -471,10 +471,14 @@ class TimePickerWidget extends DateTimeWidgetBase {
       // Callback for the array_walk_recursive().
       $filter = function (&$item, $key, $groups) {
         if (in_array($key, $groups['boolean'], TRUE)) {
-          $item = (bool) $item;
+          if ($item !== NULL) {
+            $item = (bool) $item;
+          }
         }
         elseif (in_array($key, $groups['int'], TRUE)) {
-          $item = (int) $item;
+          if ($item !== NULL) {
+            $item = (int) $item;
+          }
         }
         elseif (in_array($key, $groups['no_filtering'], TRUE)) {
           // Do nothing.
