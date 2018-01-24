@@ -5,7 +5,6 @@ namespace Drupal\date_popup_timepicker\Plugin\Field\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\datetime_range\Plugin\Field\FieldWidget\DateRangeWidgetBase;
-use Drupal\Component\Utility\Html;
 
 /**
  * Plugin implementation of the 'datetime_timepicker_list' widget.
@@ -31,7 +30,7 @@ class DateRangeTimePickerWidget extends DateRangeWidgetBase {
     foreach ($name_field as $name) {
       $element['#attached']['library'][] = 'date_popup_timepicker/timepicker';
       $element['#attached']['drupalSettings']['datePopup'][$name] = array(
-        'settings' => $this->processFieldSettings($this->getSettings()),
+        'settings' => TimePickerWidget::processFieldSettings($this->getSettings()),
       );
     }
     return $element;
@@ -41,112 +40,7 @@ class DateRangeTimePickerWidget extends DateRangeWidgetBase {
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return [
-      // Define whether or not to show a leading zero for hours < 10.
-      'showLeadingZero' => TRUE,
-      // Define whether or not to show a leading zero for minutes < 10.
-      'showMinutesLeadingZero' => TRUE,
-      // Define whether or not to show AM/PM with selected time.
-      'showPeriod' => FALSE,
-      // Define if the AM/PM labels on the left are displayed.
-      'showPeriodLabels' => TRUE,
-      // The character to use to separate the time from the time period.
-      'periodSeparator' => ' ',
-      // Define an alternate input to parse selected time to.
-      'altField' => '#alternate_input',
-      // Used as default time when input field is empty or for inline
-      // timePicker.
-      // Set to 'now' for the current time, '' for no highlighted time.
-      'defaultTime' => 'now',
-      // Trigger options.
-      // Define when the timepicker is shown.
-      // 'focus': when the input gets focus, 'button' when the button
-      // trigger element is clicked.
-      // 'both': when the input gets focus and when the button is clicked.
-      'showOn' => 'focus',
-      // jQuery selector that acts as button trigger. ex: '#trigger_button'.
-      'button' => NULL,
-      // Localization.
-      // Define the locale text for "Hours".
-      'hourText' => 'Hour',
-      // Define the locale text for "Minute".
-      'minuteText' => 'Minute',
-      // Define the locale text for periods.
-      'amPmText' => array('AM', 'PM'),
-      // Position.
-      // Corner of the dialog to position, used with the jQuery UI Position
-      // utility if present.
-      'myPosition' => 'left top',
-      // Corner of the input to position.
-      'atPosition' => 'left bottom',
-      // Events.
-      // Callback function executed before the timepicker is
-      // rendered and displayed.
-      'beforeShow' => NULL,
-      // Define a callback function when an hour / minutes is selected.
-      'onSelect' => NULL,
-      // Define a callback function when the timepicker is closed.
-      'onClose' => NULL,
-      // Define a callback to enable / disable certain hours.
-      // ex: function onHourShow(hour).
-      'onHourShow' => NULL,
-      // Define a callback to enable / disable certain minutes. ex:
-      // function onMinuteShow(hour, minute).
-      'onMinuteShow' => NULL,
-      // Custom hours and minutes.
-      'hours' => array(
-        // First displayed hour.
-        'starts' => 0,
-        // Last displayed hour.
-        'ends' => 23,
-      ),
-      'minutes' => array(
-        // First displayed minute.
-        'starts' => 0,
-        // Last displayed minute.
-        'ends' => 55,
-        // Interval of displayed minutes.
-        'interval' => 5,
-        // Optional extra entries for minutes.
-        'manual' => array(),
-      ),
-      // Number of rows for the input tables, minimum 2,
-      // makes more sense if you use multiple of 2.
-      'rows' => 4,
-      // Define if the hours section is displayed or not.
-      // Set to false to get a minute only dialog.
-      'showHours' => TRUE,
-      // Define if the minutes section is displayed or not.
-      // Set to false to get an hour only dialog.
-      'showMinutes' => TRUE,
-
-      // Min and Max time.
-      // Set the minimum time selectable by the user, disable hours and minutes
-      // previous to min time.
-      'minTime' => array(
-        'hour' => 0,
-        'minute' => 0,
-      ),
-      // Set the minimum time selectable by the user, disable hours and minutes
-      // after max time.
-      'maxTime' => array(
-        'hour' => 23,
-        'minute' => 59,
-      ),
-      // Buttons.
-      // Shows an OK button to confirm the edit.
-      'showCloseButton' => FALSE,
-      // Text for the confirmation button (ok button).
-      'closeButtonText' => 'Done',
-      // Shows the 'now' button.
-      'showNowButton' => FALSE,
-      // Text for the now button.
-      'nowButtonText' => 'Now',
-      // Shows the deselect time button.
-      'showDeselectButton' => FALSE,
-      // Text for the deselect button.
-      'deselectButtonText' => 'Deselect',
-    ] + parent::defaultSettings();
+    return TimePickerWidget::defaultSettings() + parent::defaultSettings();
   }
 
   /**
@@ -376,166 +270,7 @@ class DateRangeTimePickerWidget extends DateRangeWidgetBase {
    * {@inheritdoc}
    */
   public static function fieldSettingsFormValidate(&$element, FormStateInterface $form_state) {
-    $key = $element['#parents'][count($element['#parents']) - 1];
-    $copy_element_settings = $element['#parents'];
-    unset($copy_element_settings[count($copy_element_settings) - 1]);
-    $settings = &$form_state->getValue($copy_element_settings);
-
-    // For two-tiered array.
-    foreach ($settings[$key] as $subkey => $value) {
-      // Init validation limits.
-      if ($key == 'minutes' && $subkey == 'interval') {
-        $limits = array(1, 59);
-      }
-      elseif ($key == 'hours' || $subkey == 'hour') {
-        $limits = array(0, 23);
-      }
-      // Remaining things are minutes.
-      else {
-        $limits = array(0, 59);
-      }
-      // Validate int hours and minutes settings.
-      if ($value !== '') {
-        if (!is_numeric($value) || intval($value) != $value || $value < $limits[0] || $value > $limits[1]) {
-          $t_args = array(
-            '%name' => $element['#title'],
-            '@start' => $limits[0],
-            '@end' => $limits[1],
-          );
-          $form_state->setErrorByName($element['#markup'],
-            t('%name must be an integer between @start and @end.', $t_args));
-        }
-        else {
-          $form_state->set($settings[$key][$subkey], (int) $value);
-        }
-      }
-      else {
-        $form_state->set($settings[$key][$subkey], NULL);
-      }
-    }
-    // For one-tiered array.
-    if ($settings[$key] !== '') {
-      // Validate rows part.
-      if ($key === 'rows') {
-        if (!is_numeric($settings[$key]) || intval($settings[$key]) != $settings[$key] || $settings[$key] < 2) {
-          $t_args = array(
-            '%name' => $element['#title'],
-          );
-          $form_state->setErrorByName($element['#markup'], t('%name must be an integer greater than 1.', $t_args));
-        }
-        else {
-          $form_state->set($settings[$key], (int) $settings[$key]);
-        }
-      }
-    }
-    else {
-      $form_state->set($settings[$key], NULL);
-    }
-  }
-
-  /**
-   * Function of typification options Timepicker.
-   *
-   * @param array $settings
-   *   Settings for JS Timepicker.
-   *
-   * @return array
-   *   return array of changed settings after typefications of all parameters.
-   */
-  public function processFieldSettings(array $settings) {
-    $options = isset($settings) ? $settings : array();
-    if (!empty($options)) {
-      $groups = array(
-        'boolean' => array(
-          'showLeadingZero',
-          'showMinutesLeadingZero',
-          'showPeriod',
-          'showPeriodLabels',
-          'showHours',
-          'showMinutes',
-          'showCloseButton',
-          'showNowButton',
-          'showDeselectButton',
-        ),
-        'int' => array(
-          'hours',
-          'minutes',
-          'rows',
-          'hour',
-          'minute',
-          'interval',
-          'starts',
-          'ends',
-        ),
-        'no_filtering' => array(
-          'periodSeparator',
-        ),
-      );
-      // Callback for the array_walk_recursive().
-      $filter = function (&$item, $key, $groups) {
-        if (in_array($key, $groups['boolean'], TRUE)) {
-          $item = (bool) $item;
-        }
-        elseif (in_array($key, $groups['int'], TRUE)) {
-          $item = (int) $item;
-        }
-        elseif (in_array($key, $groups['no_filtering'], TRUE)) {
-          // Do nothing.
-        }
-        else {
-          // @todo Use filter_xss_admin() instead?
-          $item = Html::escape($item);
-        }
-      };
-      // Filter user submitted settings since plugin builds output by just
-      // concatenation of strings so it's possible, for example,
-      // to insert html into labels.
-      array_walk_recursive($options, $filter, $groups);
-    }
-    return $this->fieldSettingsFinalNullCleanType($options);
-  }
-
-  /**
-   * Method deleting Null parameters before send to JS.
-   *
-   * @param array $settings
-   *   Non-filter parameters.
-   *
-   * @return array
-   *   Returned filtering Parameters for send to JS.
-   */
-  public function fieldSettingsFinalNullCleanType(array &$settings) {
-    $new = $settings;
-    // Convert boolean settings to boolean.
-    $boolean = array(
-      'showLeadingZero',
-      'showMinutesLeadingZero',
-      'showPeriod',
-      'showPeriodLabels',
-      'showHours',
-      'showMinutes',
-      'showCloseButton',
-      'showNowButton',
-      'showDeselectButton',
-    );
-    foreach ($boolean as $key) {
-      $new[$key] = (bool) $settings[$key];
-    }
-    // Final cleanup.
-    $not_null = function ($el) {
-      return isset($el);
-    };
-    foreach (array('hours', 'minutes', 'minTime', 'maxTime') as $key) {
-      $new[$key] = array_filter($settings[$key], $not_null);
-      if (empty($new[$key])) {
-        unset($new[$key]);
-      }
-    }
-    if (!isset($new['rows'])) {
-      // Make sure that NULL value is removed from settings.
-      unset($new['rows']);
-    }
-    return $new;
+    return TimePickerWidget::fieldSettingsFormValidate($element, $form_state);
   }
 
 }

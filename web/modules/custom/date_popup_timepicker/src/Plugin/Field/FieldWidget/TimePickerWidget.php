@@ -29,7 +29,7 @@ class TimePickerWidget extends DateTimeWidgetBase {
     $name = $name . '[' . $delta . '][value][time]';
     $element['#attached']['library'][] = 'date_popup_timepicker/timepicker';
     $element['#attached']['drupalSettings']['datePopup'][$name] = array(
-      'settings' => $this->processFieldSettings($this->getSettings()),
+      'settings' => self::processFieldSettings($this->getSettings()),
     );
     return $element;
   }
@@ -439,7 +439,7 @@ class TimePickerWidget extends DateTimeWidgetBase {
    * @return array
    *   return array of changed settings after typefications of all parameters.
    */
-  public function processFieldSettings(array $settings) {
+  public static function processFieldSettings(array $settings) {
     $options = isset($settings) ? $settings : array();
     if (!empty($options)) {
       $groups = array(
@@ -493,7 +493,7 @@ class TimePickerWidget extends DateTimeWidgetBase {
       // to insert html into labels.
       array_walk_recursive($options, $filter, $groups);
     }
-    return $this->fieldSettingsFinalNullCleanType($options);
+    return self::fieldSettingsFinalNullCleanType($options);
   }
 
   /**
@@ -505,7 +505,7 @@ class TimePickerWidget extends DateTimeWidgetBase {
    * @return array
    *   Returned filtering Parameters for send to JS.
    */
-  public function fieldSettingsFinalNullCleanType(array &$settings) {
+  public static function fieldSettingsFinalNullCleanType(array &$settings) {
     $new = $settings;
     // Convert boolean settings to boolean.
     $boolean = array(
